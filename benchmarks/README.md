@@ -79,5 +79,5 @@ Running the benchmark requires **Python 3**, **pandas**, and **Node.js** (18+).
 ## Notes
 
 - Caveman is a prose-compression skill (it leaves code "normal"), so it lands between baseline and ponytail on code size and wins mainly on prose tokens.
-- Cost reflects single-shot calls that re-send the skill every time. In real sessions the skill is injected once and prompt-cached, so the cost gap widens further in ponytail's favor.
+- Cost reflects single-shot calls (one prompt, one completion), not real multi-turn agent sessions. In a session the ruleset re-injects and the ladder deliberates every turn across many turns, so per-session cost can come out higher or lower than these numbers. Prompt caching offsets some of the re-injection, but a measured agentic A/B ([#121](https://github.com/DietrichGebert/ponytail/issues/121)) found ponytail can also raise tool calls and cost on completion-forced tasks. Treat these as generation numbers, not a session-cost promise.
 - These are everyday tasks. For production-grade specs, where an unconstrained agent bloats much harder, see the writeups in `results/`.
